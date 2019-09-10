@@ -201,7 +201,15 @@ export default class Formatter {
       } else if ( char == "=" && next == "=" ) {
         currTokenType = TokenType.Word;
         nextSeek = 2;
-      } else if (( char == "+" || char == "-" || char == "*" || char == "/" ) && next == "=" ) {
+      } else if (
+        ( 
+            // Math operators
+            char == "+" || char == "-" || char == "*" || char == "/" || char == "%" || // FIXME: Find a way to work with the `**` operator
+            // Bitwise operators
+            char == "~" || char == "|" || char == "^" || // FIXME: Find a way to work with the `<<` and `>>` bitwise operators
+            // Other operators 
+            char == "."
+        ) && next == "=" ) {
         currTokenType = TokenType.Assignment;
         nextSeek = 2;
       } else if ( char == "=" && next != "=" ) {
